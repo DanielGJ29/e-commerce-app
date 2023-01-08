@@ -45,7 +45,7 @@ const Header = () => {
 
       <div className="w-10">
         <select
-          className="text-white border-none rounded-lg w-full"
+          className="text-white border-none rounded-lg w-full bg"
           onChange={(e) => handleDarkMode(e.target.value)}
         >
           <option className="bg-primary" value="primary"></option>
