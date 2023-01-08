@@ -1,38 +1,29 @@
 import { useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
-//Actions
-import { handleDarkModeAction } from "../../redux/actions/darkmode.action";
 
 //Component
 import Form from "../../component/Form/Form";
 
 //context
-//mport CartContext from "../../Context/CartContext";
 import StoreContext from "../../Context/StoreContext";
-import DarkModeContext from "../../Context/DarkModeContext";
 
 //icons
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
-  // redux;
-  const dispatch = useDispatch();
-  const { color } = useSelector((store) => store.darkmode);
-
   //context
-  const { darkMode } = useContext(DarkModeContext);
-  const { state } = useContext(StoreContext);
+  const { state, dispatch } = useContext(StoreContext);
 
   //Funciones
   const handleDarkMode = (color) => {
-    dispatch(handleDarkModeAction(color));
+    dispatch({ type: "DARKMODE", payload: color });
   };
 
   return (
-    <div className={`w-full h-14 flex justify-around items-center bg-${color}`}>
+    <div
+      className={`w-full h-14 flex justify-around items-center bg-${state?.color}`}
+    >
       <div className="text-white">
         <Link to="/">
           <p>ECOMMERCE</p>
@@ -52,11 +43,14 @@ const Header = () => {
         </Link>
       </div>
 
-      <div>
-        <select onChange={(e) => handleDarkMode(e.target.value)}>
-          <option value="primary">blue</option>
-          <option value="black">Dark</option>
-          <option value="yellow-400">Yellow</option>
+      <div className="w-10">
+        <select
+          className="text-white border-none rounded-lg w-full"
+          onChange={(e) => handleDarkMode(e.target.value)}
+        >
+          <option className="bg-primary" value="primary"></option>
+          <option className="bg-black" value="black"></option>
+          <option className="bg-yellow-400" value="yellow-400"></option>
         </select>
       </div>
     </div>

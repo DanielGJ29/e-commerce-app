@@ -9,9 +9,8 @@ const StoreContext = createContext();
 const initialState = {
   list: [],
   cart: [],
-  cartLength: 0,
   total: 0,
-  color: "cyan-600",
+  color: "primary",
 };
 
 const reducer = (state, action) => {
@@ -45,7 +44,7 @@ const reducer = (state, action) => {
               totalPrice: resultTotalPrice,
             },
           ],
-          cartLength: state.cart.length,
+
           total: state.total + action.payload.price,
         };
       } else {
@@ -60,7 +59,6 @@ const reducer = (state, action) => {
             },
           ],
           total: state.total + action.payload.price,
-          cartLength: state.cart.length,
         };
       }
 
@@ -131,9 +129,13 @@ const reducer = (state, action) => {
       };
 
     case "SEARCH":
-      console.log(action.payload);
-
       return state;
+
+    case "DARKMODE":
+      return {
+        ...state,
+        color: action.payload,
+      };
 
     default:
       return state;

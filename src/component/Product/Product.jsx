@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 //Context
 import StoreContext from "../../Context/StoreContext";
-import DarkModeContext from "../../Context/DarkModeContext";
+
 //icons
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Product = ({ id, title, price, description, image, rating }) => {
   const { state, dispatch } = useContext(StoreContext);
   const history = useHistory();
-  const { darkMode } = useContext(DarkModeContext);
+
   //Functions
   const handleClickItem = () => {
     history.push(`/SingleProduct/${id}`);
@@ -37,7 +37,7 @@ const Product = ({ id, title, price, description, image, rating }) => {
       <div className="flex justify-between items-center p-2">
         <p className="mt-2 font-semibold text-2xl">${price}</p>
         <button
-          className={`bg-${darkMode} rounded-md px-4 py-0 h-7`}
+          className={`bg-${state?.color} rounded-md px-4 py-0 h-7`}
           onClick={() =>
             dispatch({
               type: "ADD_TO_CART",
