@@ -38,7 +38,7 @@ const Cart = () => {
   return (
     <>
       {cart?.length !== 0 ? (
-        <div className="bg-white w-11/12 mx-auto mt-5">
+        <div className="bg-white w-11/12 md:w-9/12  mx-auto mt-5">
           <div className="flex justify-center items-center bg-transparent">
             <p className="font-semibold text-lg">
               Productos en el carrito <span className="">{cart?.length}</span>
@@ -71,9 +71,11 @@ const Cart = () => {
 
           <div className="flex justify-end gap-10 px-3 py-3 mt-3 border-t-2 border-b-2">
             <div>
-              <p className="font-semibold text-2xl">Total, a pagar</p>
+              <p className="font-semibold text-xl md:text-2xl">
+                Total, a pagar
+              </p>
             </div>
-            <div className="font-semibold text-2xl">
+            <div className="font-semibold text-xl md:text-2xl">
               <p>${new Intl.NumberFormat().format(total)}</p>
             </div>
           </div>

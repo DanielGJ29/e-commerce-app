@@ -32,7 +32,7 @@ const Product = ({ id, title, price, description, image, rating }) => {
     );
   };
   return (
-    <div className="bg-white w-72 h-[420px] rounded-sm mx-auto flex flex-col justify-between hover:shadow-lg">
+    <div className="bg-white w-56 h-[420px]  rounded-sm mx-auto flex flex-col justify-between hover:shadow-lg">
       <div
         className="w-full h-72 mx-auto border-b-[0.5px] p-2 cursor-pointer"
         onClick={handleClickItem}
@@ -52,22 +52,7 @@ const Product = ({ id, title, price, description, image, rating }) => {
         <p className="mt-2 font-semibold text-2xl">${price}</p>
         <button
           className={`bg-${color} rounded-md px-4 py-0 h-7`}
-          onClick={
-            handleAddToCart
-            // dispatch({
-            //   type: "ADD_TO_CART",
-            //   payload: {
-            //     id,
-            //     title,
-            //     price,
-            //     description,
-            //     image,
-            //     rating,
-            //     quantity: 1,
-            //   },
-            // }
-            // )
-          }
+          onClick={handleAddToCart}
         >
           + <FontAwesomeIcon icon={faCartShopping} size="lg" />{" "}
         </button>

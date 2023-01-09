@@ -22,19 +22,19 @@ const Header = () => {
   return (
     <div className={`w-full h-14 flex justify-around items-center bg-${color}`}>
       <div className="text-white">
-        <p>ECOMMERCE</p>
+        <p>E-COMMERCE</p>
       </div>
-      <div className="w-1/3">{/* <Form /> */}</div>
+
       <div className="flex gap-6  text-white">
         <Link to="/">
           <p className="cursor-pointer">Productos</p>
         </Link>
 
-        <p className="cursor-pointer">Iniciar Sesion</p>
+        <p className="cursor-pointer hidden md:block">Iniciar Sesion</p>
 
         <Link to="/cart">
           <p className="cursor-pointer">
-            Carrito
+            <span className="hidden">Carrito</span>
             <FontAwesomeIcon
               icon={faCartShopping}
               size="lg"
@@ -45,7 +45,7 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="flex gap-2 text-white">
+      <div className="hidden gap-2 text-white md:flex">
         <p>Tema: </p>
         <select
           className={`bg-${color} text-white hover:bg-white hover:bg-opacity-20`}
