@@ -32,7 +32,6 @@ const Cart = () => {
 
   //Functions
   const handleGoShopping = () => {
-    console.log(history);
     history.push("/");
   };
 

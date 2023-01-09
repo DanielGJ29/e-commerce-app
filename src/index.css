@@ -25,9 +25,6 @@ body {
 button {
   color: white;
 }
-/* button:hover {
-  background-color: var(--color-tertiary);
-} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
