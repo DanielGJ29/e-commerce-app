@@ -1,22 +1,36 @@
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-//Context
-import StoreContext from "../../Context/StoreContext";
-import DarkModeContext from "../../Context/DarkModeContext";
 //icons
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//Actions
+import { handleAddProductsAction } from "../../redux/actions/shop.action";
+
 const Product = ({ id, title, price, description, image, rating }) => {
-  const { state, dispatch } = useContext(StoreContext);
   const history = useHistory();
-  const { darkMode } = useContext(DarkModeContext);
+  const dispatch = useDispatch();
+  const { color } = useSelector((store) => store.darkmode);
+
   //Functions
   const handleClickItem = () => {
     history.push(`/SingleProduct/${id}`);
   };
 
+  const handleAddToCart = () => {
+    dispatch(
+      handleAddProductsAction({
+        id,
+        title,
+        price,
+        description,
+        image,
+        rating,
+        quantity: 1,
+      })
+    );
+  };
   return (
     <div className="bg-white w-72 h-[420px] rounded-sm mx-auto flex flex-col justify-between hover:shadow-lg">
       <div
@@ -37,20 +51,22 @@ const Product = ({ id, title, price, description, image, rating }) => {
       <div className="flex justify-between items-center p-2">
         <p className="mt-2 font-semibold text-2xl">${price}</p>
         <button
-          className={`bg-${darkMode} rounded-md px-4 py-0 h-7`}
-          onClick={() =>
-            dispatch({
-              type: "ADD_TO_CART",
-              payload: {
-                id,
-                title,
-                price,
-                description,
-                image,
-                rating,
-                quantity: 1,
-              },
-            })
+          className={`bg-${color} rounded-md px-4 py-0 h-7`}
+          onClick={
+            handleAddToCart
+            // dispatch({
+            //   type: "ADD_TO_CART",
+            //   payload: {
+            //     id,
+            //     title,
+            //     price,
+            //     description,
+            //     image,
+            //     rating,
+            //     quantity: 1,
+            //   },
+            // }
+            // )
           }
         >
           + <FontAwesomeIcon icon={faCartShopping} size="lg" />{" "}

@@ -23,12 +23,11 @@ body {
 }
 
 button {
-  background-color: var(--color-primary);
   color: white;
 }
-button:hover {
+/* button:hover {
   background-color: var(--color-tertiary);
-}
+} */
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

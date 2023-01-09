@@ -1,23 +1,17 @@
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-
-//context
-import LoginContext from "../../Context/LoginContext";
 
 //Component
 import Title from "../Custom/Titles/Titles";
-import Button from "../Custom/Button/Button";
 
 const Login = () => {
-  const { dispatch } = useContext(LoginContext);
   const history = useHistory();
 
   //Functions
   const handleLogin = async (e) => {
     e.preventDefault();
-    const request = await fetch("https://jsonplaceholder.typicode.com/users");
-    const result = await request.json();
-    dispatch({ type: "Login_user", payload: result[0] });
+    // const request = await fetch("https://jsonplaceholder.typicode.com/users");
+    // const result = await request.json();
+
     history.push("./");
   };
   return (

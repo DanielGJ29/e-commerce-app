@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
@@ -8,14 +8,10 @@ import { handleShowProductsAction } from "../../redux/actions/shop.action";
 import Loader from "../../component/Custom/Loader/Loader";
 import Product from "../../component/Product/Product";
 
-//Context
-import StoreContext from "../../Context/StoreContext";
-
 //Hooks
 import { useFetchData } from "../../Hooks/useFetchData";
 
 const Home = () => {
-  //const { state } = useContext(StoreContext);
   const dispatch = useDispatch();
   const { list } = useSelector((store) => store.shop);
 

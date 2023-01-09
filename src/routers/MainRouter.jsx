@@ -1,5 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { useContext } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 //Layout
 import LayoutMain from "../Layout/LayoutMain";
@@ -10,12 +9,7 @@ import SingleProduct from "../Pages/SingleProduct/SingleProduct";
 import Cart from "../Pages/Cart/Cart";
 import Login from "../component/Login/Login";
 
-//Context
-import LoginContext from "../Context/LoginContext";
-
 const MainRouter = () => {
-  const { state } = useContext(LoginContext);
-
   return (
     <BrowserRouter>
       <Switch>
@@ -24,11 +18,9 @@ const MainRouter = () => {
         </Route>
 
         <LayoutMain>
-          <Route
-            path="/"
-            exact
-            render={() => (state.user ? <Home /> : <Redirect to="/login" />)}
-          />
+          <Route path="/" exact>
+            <Home />
+          </Route>
 
           <Route path="/SingleProduct/:id" exact>
             <SingleProduct />

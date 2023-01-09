@@ -1,17 +1,8 @@
-import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 //Actions
 import { handleDarkModeAction } from "../../redux/actions/darkmode.action";
-
-//Component
-import Form from "../../component/Form/Form";
-
-//context
-//mport CartContext from "../../Context/CartContext";
-import StoreContext from "../../Context/StoreContext";
-import DarkModeContext from "../../Context/DarkModeContext";
 
 //icons
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
@@ -21,10 +12,7 @@ const Header = () => {
   // redux;
   const dispatch = useDispatch();
   const { color } = useSelector((store) => store.darkmode);
-
-  //context
-  const { darkMode } = useContext(DarkModeContext);
-  const { state } = useContext(StoreContext);
+  const { cart } = useSelector((store) => store.shop);
 
   //Funciones
   const handleDarkMode = (color) => {
@@ -34,29 +22,44 @@ const Header = () => {
   return (
     <div className={`w-full h-14 flex justify-around items-center bg-${color}`}>
       <div className="text-white">
-        <Link to="/">
-          <p>ECOMMERCE</p>
-        </Link>
+        <p>ECOMMERCE</p>
       </div>
-      <div className="w-1/3">
-        <Form />
-      </div>
+      <div className="w-1/3">{/* <Form /> */}</div>
       <div className="flex gap-6  text-white">
-        <p className="cursor-pointer">Crea tu cuenta</p>
+        <Link to="/">
+          <p className="cursor-pointer">Productos</p>
+        </Link>
+
         <p className="cursor-pointer">Iniciar Sesion</p>
+
         <Link to="/cart">
           <p className="cursor-pointer">
-            <FontAwesomeIcon icon={faCartShopping} size="lg" />{" "}
-            <span className="font-bold">{state.cart.length}</span>
+            Carrito
+            <FontAwesomeIcon
+              icon={faCartShopping}
+              size="lg"
+              className="ml-2"
+            />{" "}
+            <span className="font-bold">{cart.length}</span>
           </p>
         </Link>
       </div>
 
-      <div>
-        <select onChange={(e) => handleDarkMode(e.target.value)}>
-          <option value="primary">blue</option>
-          <option value="black">Dark</option>
-          <option value="yellow-400">Yellow</option>
+      <div className="flex gap-2 text-white">
+        <p>Tema: </p>
+        <select
+          className={`bg-${color} text-white hover:bg-white hover:bg-opacity-20`}
+          onChange={(e) => handleDarkMode(e.target.value)}
+        >
+          <option className="bg-primary" value="primary">
+            Blue
+          </option>
+          <option className="bg-gray-900" value="gray-900">
+            Dark
+          </option>
+          <option className="bg-yellow-400" value="yellow-400">
+            Yellow
+          </option>
         </select>
       </div>
     </div>

@@ -1,8 +1,12 @@
 import { useHistory } from "react-router-dom";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-//Context
-import StoreContext from "../../Context/StoreContext";
+//Actions
+import {
+  handleAddQuantityProductsAction,
+  handleDeleteProductsAction,
+} from "../../redux/actions/shop.action";
 
 const CartItem = ({
   id,
@@ -15,8 +19,8 @@ const CartItem = ({
   totalPrice,
 }) => {
   const history = useHistory();
-  const { dispatch } = useContext(StoreContext);
   const [option, setOption] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const array = [];
@@ -33,41 +37,37 @@ const CartItem = ({
 
   const handleSelectQuantity = (e) => {
     let value = parseInt(e.target.value);
-
-    if (value < quantity) {
-      dispatch({
-        type: "ADD_QUANTITY",
-        payload: {
-          id,
-          title,
-          price,
-          image,
-          description,
-          rating,
-          quantity: value,
-        },
-      });
-    } else {
-      dispatch({
-        type: "ADD_QUANTITY",
-        payload: {
-          id,
-          title,
-          price,
-          image,
-          description,
-          rating,
-          quantity: value,
-        },
-      });
-    }
+    dispatch(
+      handleAddQuantityProductsAction({
+        id,
+        title,
+        price,
+        image,
+        description,
+        rating,
+        quantity: value,
+      })
+    );
+    // dispatch({
+    //   type: "ADD_QUANTITY",
+    //   payload: {
+    //     id,
+    //     title,
+    //     price,
+    //     image,
+    //     description,
+    //     rating,
+    //     quantity: value,
+    //   },
+    // });
   };
 
   const handleDeleteItem = () => {
-    dispatch({
-      type: "DELETE_FROM_CART",
-      payload: id,
-    });
+    // dispatch({
+    //   type: "DELETE_FROM_CART",
+    //   payload: id,
+    // });
+    dispatch(handleDeleteProductsAction(id));
   };
 
   return (

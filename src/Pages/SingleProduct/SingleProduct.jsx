@@ -1,5 +1,6 @@
 import { useParams, useHistory } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 //Component
 import Loader from "../../component/Custom/Loader/Loader";
@@ -7,36 +8,44 @@ import Loader from "../../component/Custom/Loader/Loader";
 //Hooks
 import { useFetchData } from "../../Hooks/useFetchData";
 
-//Context
-import DarkModeContext from "../../Context/DarkModeContext";
-import StoreContext from "../../Context/StoreContext";
+//Actions
+import { handleAddProductsAction } from "../../redux/actions/shop.action";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const { loader } = useFetchData(
     `${process.env.REACT_APP_API_STORE}products/${id}`
   );
-  const { darkMode } = useContext(DarkModeContext);
-  const { state, dispatch } = useContext(StoreContext);
+
   const [product, setProduct] = useState();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { list } = useSelector((store) => store.shop);
+  const { color } = useSelector((store) => store.darkmode);
 
   useEffect(() => {
-    setProduct(state.list?.filter((item) => item.id === +id));
-  }, [state.list, id]);
+    setProduct(list?.filter((item) => item.id === +id));
+  }, [list, id]);
 
   //Functions
-  // const handleSelectQuantity = (e) => {
-  //   const value = e.target.value;
-  //   setValueQuantity(value);
-  // };
-
   const handleAddCart = () => {
     const { id, title, price, description, image, rating } = product[0];
 
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
+    // dispatch({
+    //   type: "ADD_TO_CART",
+    //   payload: {
+    //     id,
+    //     title,
+    //     price,
+    //     description,
+    //     image,
+    //     rating,
+    //     quantity: 1,
+    //   },
+    // });
+
+    dispatch(
+      handleAddProductsAction({
         id,
         title,
         price,
@@ -44,8 +53,8 @@ const SingleProduct = () => {
         image,
         rating,
         quantity: 1,
-      },
-    });
+      })
+    );
 
     history.push("/cart");
   };
@@ -73,30 +82,15 @@ const SingleProduct = () => {
                   {/* {singleProductData?.description} */}
                 </p>
                 <p className="mt-2 text-4xl">${product[0]?.price}</p>
-                {/* <p className="mt-5 border-t-2 pt-3">
-                  Stock disponible{" "}
-                  <span className="text-lg font-semibold">56</span>
-                </p> */}
-                {/* <div className="mt-5">
-                  <label>Cantidad: </label>
-                  <select
-                    name="select"
-                    className="font-semibold"
-                    onChange={(e) => handleSelectQuantity(e)}
-                  >
-                    <option value="1">1 articulo</option>
-                    <option value="2">2 articulo</option>
-                    <option value="3">3 articulo</option>
-                  </select>
-                </div> */}
+
                 <div className="flex flex-col items-center gap-2 mt-10">
                   <button
-                    className={`bg-${darkMode} px-3 w-11/12 h-9 rounded-md text-white`}
+                    className={`bg-${color} px-3 w-11/12 h-9 rounded-md text-white`}
                   >
                     Comprar ahora
                   </button>
                   <button
-                    className={`bg-${darkMode} px-3 w-11/12 h-9 rounded-md text-white`}
+                    className={`bg-${color} px-3 w-11/12 h-9 rounded-md text-white`}
                     onClick={handleAddCart}
                   >
                     Agregar al carrito

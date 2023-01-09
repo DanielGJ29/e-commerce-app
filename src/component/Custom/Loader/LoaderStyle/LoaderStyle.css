@@ -8,7 +8,7 @@
   bottom: 0;
   margin: auto;
   border: 5px solid var(--color-secondary);
-  border-top-color: var(--color-primary);
+  border-top-color: white;
   border-radius: 100%;
   -webkit-animation: girar 1.5s linear infinite;
   -o-animation: girar 1.5s linear infinite;

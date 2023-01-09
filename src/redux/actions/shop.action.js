@@ -14,9 +14,16 @@ export const handleAddProductsAction = (product) => {
   };
 };
 
-export const handleDeleteProductsAction = ({ id, price }) => {
+export const handleAddQuantityProductsAction = (product) => {
+  return {
+    type: shopTypes.ADD_QUANTITY_TO_CART,
+    payload: product,
+  };
+};
+
+export const handleDeleteProductsAction = (id) => {
   return {
     type: shopTypes.DELETE_FROM_CART,
-    payload: { id, price },
+    payload: id,
   };
 };
