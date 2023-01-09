@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export const useFetchData = (API) => {
-  const [fetchResult, setData] = useState(null);
+  const [fetchResult, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loader, setLoader] = useState(false);
 

@@ -20,7 +20,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(handleShowProductsAction(fetchResult));
+    dispatch(handleShowProductsAction(fetchResult && fetchResult));
   }, [dispatch, fetchResult]);
 
   return (
