@@ -23,11 +23,11 @@ export const useFetchData = (API) => {
     }
   }, [API]);
 
-  const handleFetchData = async (e) => {
-    const response = await fetch(API);
-    const result = await response.json();
-    setData(result);
-  };
+  // const handleFetchData = async (e) => {
+  //   const response = await fetch(API);
+  //   const result = await response.json();
+  //   setData(result);
+  // };
 
-  return { fetchResult, error, loader, handleFetchData };
+  return { fetchResult, error, loader };
 };
