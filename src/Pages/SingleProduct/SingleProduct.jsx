@@ -66,24 +66,41 @@ const SingleProduct = () => {
       ) : (
         product && (
           <div className="w-3/4 h-auto mt-10 mx-auto bg-white  rounded-md  mb-10 shadow-lg">
-            <div className="border-b-2 flex items-center">
-              <div className="w-[65%] h-auto flex items-center justify-center">
-                <div className="w-1/2 h-auto">
+            <div className="border-b-2 flex flex-col-reverse md:flex-row items-center">
+              <div className="w-full md:w-[65%] h-auto flex items-center justify-center md:border-r-2">
+                <div className="w-3/4 h-auto">
                   <img
                     className="w-full h-full object-contain p-2"
                     src={product[0]?.image}
                     alt={product[0]?.title}
                   />
+                  <p className="md:hidden  mt-2 text-center text-4xl">
+                    ${product[0]?.price}
+                  </p>
+                  <div className="md:hidden flex flex-col gap-2 mt-4 mb-4 items-center">
+                    <button
+                      className={`bg-${color} px-3 w-11/12 h-9 rounded-md text-white`}
+                    >
+                      Comprar ahora
+                    </button>
+                    <button
+                      className={`bg-${color} px-3 w-11/12 h-9 rounded-md text-white`}
+                      onClick={handleAddCart}
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div className="w-[35%] border-l-2 p-3">
-                <p className="text-xl font-semibold">
+              <div className=" w-full md:w-[35%]  p-3">
+                <p className="text-xl text-center font-semibold">
                   {product[0]?.title}
-                  {/* {singleProductData?.description} */}
                 </p>
-                <p className="mt-2 text-4xl">${product[0]?.price}</p>
+                <p className="hidden md:block mt-2 text-4xl">
+                  ${product[0]?.price}
+                </p>
 
-                <div className="flex flex-col items-center gap-2 mt-10">
+                <div className="hidden md:flex flex-col items-center gap-2 mt-10">
                   <button
                     className={`bg-${color} px-3 w-11/12 h-9 rounded-md text-white`}
                   >
